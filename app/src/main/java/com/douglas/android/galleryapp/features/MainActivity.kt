@@ -1,7 +1,8 @@
-package com.douglas.android.galleryapp
+package com.douglas.android.galleryapp.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.douglas.android.galleryapp.R
 
 class MainActivity : AppCompatActivity() {
 
