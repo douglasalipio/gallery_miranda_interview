@@ -11,5 +11,4 @@ interface AppRepository {
     fun requestMediasInfoAsync(pageNumber: Int): Deferred<List<MediaInfoDto>>
 
     fun requestPhotosAsync(photoId: Int): Deferred<List<PhotoDto>>
-
 }
