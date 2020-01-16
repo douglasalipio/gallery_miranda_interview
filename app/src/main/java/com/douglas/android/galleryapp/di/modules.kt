@@ -2,6 +2,7 @@ package com.douglas.android.galleryapp.di
 
 import android.app.Application
 import android.content.Context
+import com.douglas.android.galleryapp.data.AppRepository
 import com.douglas.android.galleryapp.data.AppRepositoryImp
 import com.douglas.android.galleryapp.data.remote.ApiHelper
 import com.douglas.android.galleryapp.data.remote.RemoteDataSource
@@ -9,10 +10,13 @@ import com.douglas.android.galleryapp.data.remote.RemoteDataSourceImp
 import com.douglas.android.galleryapp.data.remote.ServiceAppFactory
 import com.douglas.android.galleryapp.features.MainActivity
 import com.douglas.android.galleryapp.features.gallery.GalleryModule
+import com.douglas.android.galleryapp.utils.BaseSchedulerProvider
+import com.douglas.android.galleryapp.utils.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Singleton
 
 
 @Module
@@ -25,24 +29,29 @@ abstract class ActivityModule {
 @Module
 class AppModule {
     @Provides
-    @Reusable
-    internal fun provideContext(application: Application): Context = application
+    @Singleton
+    fun provideContext(application: Application) = application
+
+    @Provides
+    @Singleton
+    fun provideAppExecutors(): BaseSchedulerProvider = SchedulerProvider()
 }
 
 @Module
 class RepositoryModule {
     @Provides
-    @Reusable
-    internal fun provideAppRepository(remote: RemoteDataSource) = AppRepositoryImp(remote)
+    @Singleton
+    fun provideAppRepository(remote: RemoteDataSource): AppRepository = AppRepositoryImp(remote)
 }
 
 @Module
 class NetworkModule {
     @Provides
-    @Reusable
-    internal fun provideRemoteRepository(apiHelper: ApiHelper) = RemoteDataSourceImp(apiHelper)
+    @Singleton
+    fun provideRemoteRepository(apiHelper: ApiHelper): RemoteDataSource =
+        RemoteDataSourceImp(apiHelper)
 
     @Provides
-    @Reusable
-    internal fun providePostApi() = ServiceAppFactory.create(true)
+    @Singleton
+    fun providePostApi() = ServiceAppFactory.create(true)
 }

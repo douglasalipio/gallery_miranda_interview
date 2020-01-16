@@ -7,6 +7,6 @@ class AppRepositoryImp @Inject constructor(private val remoteDataSource: RemoteD
 
     override fun requestMediasInfoAsync(pageNumber: Int) =remoteDataSource.requestMediasInfoAsync(pageNumber)
 
-    override fun requestPhotosAsync(photoId: Int) = remoteDataSource.requestPhotosAsync(photoId)
+    override fun requestPhotosAsync(photoId: Long) = remoteDataSource.requestPhotosAsync(photoId)
 
 }

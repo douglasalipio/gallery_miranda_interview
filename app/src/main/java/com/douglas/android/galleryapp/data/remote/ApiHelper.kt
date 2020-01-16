@@ -2,32 +2,32 @@ package com.douglas.android.galleryapp.data.remote
 
 import com.douglas.android.galleryapp.data.remote.dtos.MediaInfoDto
 import com.douglas.android.galleryapp.data.remote.dtos.PhotoDto
-import kotlinx.coroutines.Deferred
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val API_KEY = "f9cc014fa76b098f9e82f1c288379ea1"
-const val BASE_URL = "https://api.flickr.com/services/rest/"
+const val BASE_URL = "https://api.flickr.com"
 
 interface ApiHelper {
 
-    @GET
+    @GET("/services/rest/")
     fun getMediaInfoAsync(
-        @Query("method") methodParam: String = "flickr.photos.search",
-        @Query("api_key") apiKey: String = API_KEY,
-        @Query("tags") tagParam: String = "kitten",
-        @Query("format") formatParam: String = "json",
-        @Query("nojsoncallback") callbackParam: Int = 1,
-        @Query("page") pageParam: Int
-    ): Deferred<List<MediaInfoDto>>
+        @Query("method",encoded = true) methodParam: String = "flickr.photos.search",
+        @Query("api_key",encoded = true) apiKey: String = API_KEY,
+        @Query("tags",encoded = true) tagParam: String = "kitten",
+        @Query("format",encoded = true) formatParam: String = "json",
+        @Query("nojsoncallback",encoded = true) callbackParam: Int = 1,
+        @Query("page",encoded = true) pageParam: Int
+    ): Observable<MediaInfoDto>
 
-    @GET
+    @GET("/services/rest/")
     fun getPhotoAsync(
-        @Query("api_key") apiKey: String = API_KEY,
-        @Query("format") formatParam: String = "json",
-        @Query("nojsoncallback") callbackParam: Int = 1,
-        @Query("tags") tagParam: String = "kitten",
-        @Query("method") methodParam: String = "flickr.photos.search",
-        @Query("photo_id") photoIdParam: Int
-    ): Deferred<List<PhotoDto>>
+        @Query("api_key",encoded = true) apiKey: String = API_KEY,
+        @Query("format",encoded = true) formatParam: String = "json",
+        @Query("nojsoncallback",encoded = true) callbackParam: Int = 1,
+        @Query("tags",encoded = true) tagParam: String = "kitten",
+        @Query("method",encoded = true) methodParam: String = "flickr.photos.getSizes",
+        @Query("photo_id",encoded = true) photoIdParam: Long
+    ): Observable<PhotoDto>
 }

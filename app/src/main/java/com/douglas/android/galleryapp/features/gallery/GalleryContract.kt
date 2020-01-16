@@ -7,9 +7,11 @@ interface GalleryContract {
 
 	interface View : BaseView<Presenter> {
 
+		fun showPhotos(imageUrl : String)
 	}
 
 	interface Presenter : BasePresenter {
 
+		fun loadPhotosGallery(pageNumber: Int = 1)
 	}
 }

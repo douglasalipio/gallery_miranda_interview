@@ -6,6 +6,6 @@ class RemoteDataSourceImp @Inject constructor(private val apiHelper: ApiHelper) 
 
     override fun requestMediasInfoAsync(pageNumber: Int) = apiHelper.getMediaInfoAsync(pageParam = pageNumber)
 
-    override fun requestPhotosAsync(photoId: Int) = apiHelper.getPhotoAsync(photoIdParam = photoId)
+    override fun requestPhotosAsync(photoId: Long) = apiHelper.getPhotoAsync(photoIdParam = photoId)
 
 }

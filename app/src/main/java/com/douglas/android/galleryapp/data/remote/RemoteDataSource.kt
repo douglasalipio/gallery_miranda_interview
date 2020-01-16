@@ -2,11 +2,11 @@ package com.douglas.android.galleryapp.data.remote
 
 import com.douglas.android.galleryapp.data.remote.dtos.MediaInfoDto
 import com.douglas.android.galleryapp.data.remote.dtos.PhotoDto
-import kotlinx.coroutines.Deferred
+import io.reactivex.Observable
 
 interface RemoteDataSource {
 
-    fun requestMediasInfoAsync(pageNumber : Int): Deferred<List<MediaInfoDto>>
+    fun requestMediasInfoAsync(pageNumber: Int): Observable<MediaInfoDto>
 
-    fun requestPhotosAsync(photoId: Int): Deferred<List<PhotoDto>>
+    fun requestPhotosAsync(photoId: Long): Observable<PhotoDto>
 }
