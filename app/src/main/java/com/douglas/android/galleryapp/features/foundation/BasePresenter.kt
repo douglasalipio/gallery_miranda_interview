@@ -1,4 +1,4 @@
-package com.douglas.android.galleryapp.foundation
+package com.douglas.android.galleryapp.features.foundation
 
 interface BasePresenter {
     /**
