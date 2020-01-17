@@ -9,6 +9,7 @@ data class PhotoDto(
 ) {
     companion object {
         const val LARGE_IMAGE = "Large Square"
+        const val FULL_IMAGE = "Large"
     }
 }
 
@@ -39,3 +40,5 @@ data class Sizes(
 )
 
 fun Sizes.largeImage() = size.find { it.label == PhotoDto.LARGE_IMAGE }?.source.orEmpty()
+
+fun Sizes.fullImage() = size.find { it.label == PhotoDto.FULL_IMAGE }?.source.orEmpty()

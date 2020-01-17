@@ -7,7 +7,7 @@ interface GalleryContract {
 
 	interface View : BaseView<Presenter> {
 
-		fun showPhotos(imageUrl : String)
+		fun showPhotos(largeImgUrl : String, fullImgUrl : String)
 	}
 
 	interface Presenter : BasePresenter {

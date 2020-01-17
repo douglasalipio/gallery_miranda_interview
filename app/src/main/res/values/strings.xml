@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">GalleryApp</string>
+	<string name="image_dialog_title">Image from Flickr</string>
 </resources>
