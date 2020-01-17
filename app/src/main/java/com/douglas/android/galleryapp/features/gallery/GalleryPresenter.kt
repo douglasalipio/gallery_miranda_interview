@@ -1,7 +1,6 @@
 package com.douglas.android.galleryapp.features.gallery
 
 import com.douglas.android.galleryapp.data.AppRepository
-import com.douglas.android.galleryapp.data.remote.dtos.Photos
 import com.douglas.android.galleryapp.utils.BaseSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -22,11 +21,11 @@ class GalleryPresenter @Inject constructor(
 
     override fun loadPhotosGallery(pageNumber: Int) {
         disposable.add(appRepository
-            .requestMediasInfoAsync(pageNumber)
+            .requestMediaInfo(pageNumber)
             .subscribeOn(schedulerProvider.io())
             .flatMap { Observable.just(it.photoIds) }
             .flatMap { iterablePhotoIds(it) }
-            .flatMap { appRepository.requestPhotosAsync(it.toLong()) }
+            .flatMap { appRepository.requestPhoto(it.toLong()) }
             .observeOn(schedulerProvider.ui())
             .subscribe { view?.showPhotos(it.largeImage) })
     }

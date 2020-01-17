@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 interface AppRepository {
 
-    fun requestMediasInfoAsync(pageNumber: Int): Observable<MediaInfoDto>
+    fun requestMediaInfo(pageNumber: Int): Observable<MediaInfoDto>
 
-    fun requestPhotosAsync(photoId: Long): Observable<PhotoDto>
+    fun requestPhoto(photoId: Long): Observable<PhotoDto>
 }

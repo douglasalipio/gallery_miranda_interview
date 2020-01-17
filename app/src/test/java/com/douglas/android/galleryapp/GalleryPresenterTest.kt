@@ -35,8 +35,8 @@ class GalleryPresenterTest {
         //Given
         val photoDto = mockPhotoDto()
         val mediaInfoDto = mockMediaInfoDto()
-        given(appRepository.requestMediasInfoAsync(1)).willReturn(Observable.just(mediaInfoDto))
-        given(appRepository.requestPhotosAsync(10)).willReturn(Observable.just(photoDto))
+        given(appRepository.requestMediaInfo(1)).willReturn(Observable.just(mediaInfoDto))
+        given(appRepository.requestPhoto(10)).willReturn(Observable.just(photoDto))
         //When
         presenter.loadPhotosGallery()
         //Than
