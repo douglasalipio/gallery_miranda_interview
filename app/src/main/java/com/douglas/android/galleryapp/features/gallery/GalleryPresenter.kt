@@ -1,6 +1,7 @@
 package com.douglas.android.galleryapp.features.gallery
 
 import com.douglas.android.galleryapp.data.AppRepository
+import com.douglas.android.galleryapp.data.remote.dtos.largeImage
 import com.douglas.android.galleryapp.utils.BaseSchedulerProvider
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -27,7 +28,7 @@ class GalleryPresenter @Inject constructor(
             .flatMap { iterablePhotoIds(it) }
             .flatMap { appRepository.requestPhoto(it.toLong()) }
             .observeOn(schedulerProvider.ui())
-            .subscribe { view?.showPhotos(it.largeImage) })
+            .subscribe { view?.showPhotos(it.sizes.largeImage()) })
     }
 
     private fun iterablePhotoIds(ids: List<String>) = Observable.fromIterable(ids)

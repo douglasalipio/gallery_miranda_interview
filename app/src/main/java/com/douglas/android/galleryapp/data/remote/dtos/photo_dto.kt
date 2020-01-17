@@ -7,10 +7,8 @@ data class PhotoDto(
     @SerializedName("sizes")
     var sizes: Sizes
 ) {
-    val largeImage by lazy { sizes.size.find { it.label == LARGE_IMAGE }?.source.orEmpty() }
-
     companion object {
-        private const val LARGE_IMAGE = "Large Square"
+        const val LARGE_IMAGE = "Large Square"
     }
 }
 
@@ -39,3 +37,5 @@ data class Sizes(
     @SerializedName("size")
     var size: List<Size>
 )
+
+fun Sizes.largeImage() = size.find { it.label == PhotoDto.LARGE_IMAGE }?.source.orEmpty()
