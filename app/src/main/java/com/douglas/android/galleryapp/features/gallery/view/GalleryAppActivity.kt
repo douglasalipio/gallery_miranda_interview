@@ -19,7 +19,7 @@ class GalleryAppActivity : DaggerAppCompatActivity(), GalleryContract.View {
     @Inject
     lateinit var presenter: GalleryContract.Presenter
     private val groupAdapter = GroupAdapter<GroupieViewHolder>()
-    private val clickOpenPhoto: (String) -> Unit = this::onOpenPhotoClick
+    private val clickOpenPhoto: (String) -> Unit = this::onPhotoClicked
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class GalleryAppActivity : DaggerAppCompatActivity(), GalleryContract.View {
     override fun showErrorMessage() =
         Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
 
-    private fun onOpenPhotoClick(url: String) = this.showFullPhotoDialog(url)
+    private fun onPhotoClicked(url: String) = this.showFullPhotoDialog(url)
 
     override fun onDestroy() {
         super.onDestroy()
