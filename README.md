@@ -17,6 +17,9 @@ Extras
 - Allow rotation
 - Open a full screen image
 - Animations
+- Unit tests
+- Version control
+- Language (Kotlin)
 
 ### Relevant 3rd party libraries
 
@@ -24,6 +27,7 @@ Extras
 - Coroutines
 - Dagger2
 - Groupie
+- Gson
 - Espresso
 - Mockito
 - Junit4
