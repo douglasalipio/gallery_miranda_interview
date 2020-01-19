@@ -24,11 +24,13 @@ fun RecyclerView.initGridLayout(
 }
 
 fun Context.showFullPhotoDialog(url: String) {
-    MaterialDialog(this).show {
+    val dialog = MaterialDialog(this)
+    dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+    dialog.show {
         customView(R.layout.full_photo_view)
         Glide.with(context).load(url).into(view.fullImage)
         cornerRadius(16f)
         title(text = context.getString(R.string.image_dialog_title))
         positiveButton { this.dismiss() }
-    }.window?.attributes?.windowAnimations = R.style.DialogAnimation
+    }
 }

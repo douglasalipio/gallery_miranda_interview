@@ -14,7 +14,7 @@ class GalleryInteractor @Inject constructor(private val appRepository: AppReposi
 
     override suspend fun requestMediaGallery(getMediaCallback: GetMediaCallback) {
 
-        val mediaInfoDto = appRepository.requestMediaInfoAsync(1).await()
+        val mediaInfoDto = appRepository.requestMediaInfoAsync().await()
         mediaInfoDto.photoIds?.map {
             val photoDto = appRepository.requestPhotoAsync(it.toLong()).await()
             getMediaCallback.onPhotoLoaded(photoDto)

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Deferred
 
 interface AppRepository {
 
-    suspend fun requestMediaInfoAsync(pageNumber: Int): Deferred<MediaInfoDto>
+    suspend fun requestMediaInfoAsync(pageNumber: Int = 1): Deferred<MediaInfoDto>
 
     suspend fun requestPhotoAsync(photoId: Long): Deferred<PhotoDto>
 }
