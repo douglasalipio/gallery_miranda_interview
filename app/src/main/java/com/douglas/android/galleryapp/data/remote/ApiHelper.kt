@@ -2,7 +2,7 @@ package com.douglas.android.galleryapp.data.remote
 
 import com.douglas.android.galleryapp.data.remote.dtos.MediaInfoDto
 import com.douglas.android.galleryapp.data.remote.dtos.PhotoDto
-import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,7 +19,7 @@ interface ApiHelper {
         @Query("format",encoded = true) formatParam: String = "json",
         @Query("nojsoncallback",encoded = true) callbackParam: Int = 1,
         @Query("page",encoded = true) pageParam: Int
-    ): Observable<MediaInfoDto>
+    ): Deferred<MediaInfoDto>
 
     @GET("/services/rest/")
     fun getPhotoAsync(
@@ -29,5 +29,5 @@ interface ApiHelper {
         @Query("tags",encoded = true) tagParam: String = "kitten",
         @Query("method",encoded = true) methodParam: String = "flickr.photos.getSizes",
         @Query("photo_id",encoded = true) photoIdParam: Long
-    ): Observable<PhotoDto>
+    ): Deferred<PhotoDto>
 }

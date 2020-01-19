@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.douglas.android.galleryapp.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.full_photo_view.view.*
+
 
 fun RecyclerView.initGridLayout(
     context: Context,
@@ -30,5 +30,5 @@ fun Context.showFullPhotoDialog(url: String) {
         cornerRadius(16f)
         title(text = context.getString(R.string.image_dialog_title))
         positiveButton { this.dismiss() }
-    }
+    }.window?.attributes?.windowAnimations = R.style.DialogAnimation
 }

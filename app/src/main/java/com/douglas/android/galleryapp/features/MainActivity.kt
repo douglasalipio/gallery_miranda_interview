@@ -32,7 +32,7 @@ class MainActivity : DaggerAppCompatActivity(), GalleryContract.View {
      */
     private fun initComponents() {
         presenter.takeView(this)
-        presenter.loadPhotosGallery(3)
+        presenter.loadMediaGallery(3)
         galleryList?.initGridLayout(this, groupAdapter, 2)
     }
 

@@ -4,8 +4,8 @@ import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(private val apiHelper: ApiHelper) : RemoteDataSource {
 
-    override fun requestMediasInfoAsync(pageNumber: Int) = apiHelper.getMediaInfoAsync(pageParam = pageNumber)
+    override suspend fun requestMediasInfoAsync(pageNumber: Int) = apiHelper.getMediaInfoAsync(pageParam = pageNumber)
 
-    override fun requestPhotosAsync(photoId: Long) = apiHelper.getPhotoAsync(photoIdParam = photoId)
+    override suspend fun requestPhotosAsync(photoId: Long) = apiHelper.getPhotoAsync(photoIdParam = photoId)
 
 }

@@ -1,46 +1,49 @@
 package com.douglas.android.galleryapp
 
-import com.douglas.android.galleryapp.data.AppRepository
 import com.douglas.android.galleryapp.data.remote.dtos.*
 import com.douglas.android.galleryapp.features.gallery.GalleryContract
+import com.douglas.android.galleryapp.features.gallery.GalleryInteractor
 import com.douglas.android.galleryapp.features.gallery.GalleryPresenter
-import com.douglas.android.galleryapp.utils.TrampolineSchedulerProvider
-import com.nhaarman.mockitokotlin2.given
-import com.nhaarman.mockitokotlin2.then
-import io.reactivex.Observable
-import org.junit.Before
-import org.junit.Test
+import com.douglas.android.galleryapp.utils.launchSilent
+import com.nhaarman.mockitokotlin2.capture
+import com.nhaarman.mockitokotlin2.verify
+import org.junit.*
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
+import kotlin.coroutines.EmptyCoroutineContext
 
 
 class GalleryPresenterTest {
 
     @Mock
-    private lateinit var appRepository: AppRepository
+    private lateinit var interactor: GalleryContract.Interactor
     @Mock
     private lateinit var view: GalleryContract.View
-    private lateinit var presenter: GalleryContract.Presenter
-    private var schedulerProvider = TrampolineSchedulerProvider()
+    @Captor
+    private lateinit var getMediaCallbackCaptor: ArgumentCaptor<GalleryInteractor.GetMediaCallback>
+    private lateinit var presenter: GalleryPresenter
 
     @Before
     fun setUp() {
         initMocks(this)
-        presenter = GalleryPresenter(appRepository, schedulerProvider)
+        presenter = GalleryPresenter(interactor)
         presenter.takeView(view)
     }
 
     @Test
     fun `should load media information`() {
-        //Given
-        val photoDto = mockPhotoDto()
-        val mediaInfoDto = mockMediaInfoDto()
-        given(appRepository.requestMediaInfo(1)).willReturn(Observable.just(mediaInfoDto))
-        given(appRepository.requestPhoto(10)).willReturn(Observable.just(photoDto))
-        //When
-        presenter.loadPhotosGallery()
-        //Than
-        then(view).should().showPhotos(photoDto.largeImage)
+        launchSilent(EmptyCoroutineContext) {
+            //Given
+            val photoDto = mockPhotoDto()
+            presenter.loadMediaGallery(1)
+            //When
+            verify(interactor).requestMediaGallery(capture(getMediaCallbackCaptor))
+            getMediaCallbackCaptor.value.onPhotoLoaded(photoDto)
+            //Than
+            verify(view).showPhotos(photoDto.sizes.largeImage(), photoDto.sizes.fullImage())
+        }
     }
 
     private fun mockMediaInfoDto(): MediaInfoDto {

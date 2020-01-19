@@ -9,4 +9,8 @@ abstract class GalleryModule {
     @ActivityScoped
     @Binds
     internal abstract fun provideGalleryPresenter(presenter: GalleryPresenter): GalleryContract.Presenter
+
+    @ActivityScoped
+    @Binds
+    internal abstract fun provideGalleryInteractor(interactor: GalleryInteractor): GalleryContract.Interactor
 }

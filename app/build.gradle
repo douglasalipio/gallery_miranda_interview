@@ -37,7 +37,7 @@ dependencies {
     //Network dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
     //Test dependencies
     testImplementation "junit:junit:4.12"
@@ -46,15 +46,10 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
     testImplementation "org.hamcrest:hamcrest-all:1.3"
 
-    //Asynchronous dependencies
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
     //Sectioned recycler view
     implementation "com.xwray:groupie:2.7.0"
     implementation "com.xwray:groupie-kotlin-android-extensions:2.7.0"
-    implementation "com.mikepenz:fastadapter-extensions-scroll:4.1.2" // scroll helpers
-
+    implementation "com.mikepenz:fastadapter-extensions-scroll:4.1.2"
 
     //Dependency Injection
     implementation "com.google.dagger:dagger:2.21"
@@ -72,4 +67,8 @@ dependencies {
 
     //Material dialog
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
+
+    //Asynchronous dependencies
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
 }
