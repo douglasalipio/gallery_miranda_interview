@@ -20,14 +20,15 @@ class GalleryPresenter @Inject constructor(
     }
 
     override fun loadMediaGallery(pageNumber: Int) {
-
         launchSilent(uiContext) {
             interactor.requestMediaGallery(object : GalleryInteractor.GetMediaCallback {
+
                 override fun onPhotoLoaded(photoDto: PhotoDto) {
                     view?.showPhotos(photoDto.sizes.largeImage(), photoDto.sizes.fullImage())
                 }
 
                 override fun onPhotoNotAvailable() {
+                    view?.showErrorMessage()
                 }
             })
         }

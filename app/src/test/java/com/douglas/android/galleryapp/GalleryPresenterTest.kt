@@ -36,20 +36,27 @@ class GalleryPresenterTest {
     fun `should load media information`() {
         launchSilent(EmptyCoroutineContext) {
             //Given
-            val photoDto = mockPhotoDto()
+            val fakePhoto = mockPhotoDto()
             presenter.loadMediaGallery(1)
             //When
             verify(interactor).requestMediaGallery(capture(getMediaCallbackCaptor))
-            getMediaCallbackCaptor.value.onPhotoLoaded(photoDto)
+            getMediaCallbackCaptor.value.onPhotoLoaded(fakePhoto)
             //Than
-            verify(view).showPhotos(photoDto.sizes.largeImage(), photoDto.sizes.fullImage())
+            verify(view).showPhotos(fakePhoto.sizes.largeImage(), fakePhoto.sizes.fullImage())
         }
     }
 
-    private fun mockMediaInfoDto(): MediaInfoDto {
-        val photo = Photo("123", "owner", "secret", "server", 1, "title", 1, 1, 1)
-        val photos = Photos(1, 1, 1, "10", listOf(photo))
-        return MediaInfoDto(photos)
+    @Test
+    fun `should return an error message`() {
+        launchSilent(EmptyCoroutineContext) {
+            //Given
+            presenter.loadMediaGallery(1)
+            //When
+            verify(interactor).requestMediaGallery(capture(getMediaCallbackCaptor))
+            getMediaCallbackCaptor.value.onPhotoNotAvailable()
+            //Than
+            verify(view).showErrorMessage()
+        }
     }
 
     private fun mockPhotoDto(): PhotoDto {

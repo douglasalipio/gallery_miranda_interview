@@ -1,4 +1,4 @@
-package com.douglas.android.galleryapp.features.gallery
+package com.douglas.android.galleryapp.features.gallery.view
 
 import com.bumptech.glide.Glide
 import com.douglas.android.galleryapp.R

@@ -9,12 +9,13 @@ interface GalleryContract {
     interface View : BaseView<Presenter> {
 
         fun showPhotos(largeImgUrl: String, fullImgUrl: String)
+        fun showErrorMessage()
     }
 
     interface Presenter : BasePresenter {
 
         fun loadMediaGallery(pageNumber: Int = 1)
-        //fun loadPhotoGallery(photoIds: List<String>)
+
     }
 
     interface Interactor : BaseInteractor {

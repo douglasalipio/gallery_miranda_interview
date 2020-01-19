@@ -1,4 +1,5 @@
 <resources>
 	<string name="app_name">GalleryApp</string>
 	<string name="image_dialog_title">Image from Flickr</string>
+    <string name="error_message">Generic error</string>
 </resources>

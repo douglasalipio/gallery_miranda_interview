@@ -1,9 +1,9 @@
-package com.douglas.android.galleryapp.features
+package com.douglas.android.galleryapp.features.gallery.view
 
 
 import android.os.Bundle
+import android.widget.Toast
 import com.douglas.android.galleryapp.R
-import com.douglas.android.galleryapp.features.gallery.GalleryCardItem
 import com.douglas.android.galleryapp.features.gallery.GalleryContract
 import com.douglas.android.galleryapp.utils.showFullPhotoDialog
 import com.douglas.android.galleryapp.utils.initGridLayout
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
-class MainActivity : DaggerAppCompatActivity(), GalleryContract.View {
+class GalleryAppActivity : DaggerAppCompatActivity(), GalleryContract.View {
 
     @Inject
     lateinit var presenter: GalleryContract.Presenter
@@ -27,33 +27,22 @@ class MainActivity : DaggerAppCompatActivity(), GalleryContract.View {
         initComponents()
     }
 
-    /**
-     * Initialise components
-     */
     private fun initComponents() {
         presenter.takeView(this)
         presenter.loadMediaGallery(3)
         galleryList?.initGridLayout(this, groupAdapter, 2)
     }
 
-    /**
-     * Load images in a recycler view
-     */
     override fun showPhotos(largeImgUrl: String, fullImgUrl: String) =
         groupAdapter.add(GalleryCardItem(largeImgUrl, fullImgUrl, clickOpenPhoto))
 
-    /**
-     * Show full image in a dialog
-     */
+    override fun showErrorMessage() =
+        Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+
     private fun onOpenPhotoClick(url: String) = this.showFullPhotoDialog(url)
 
-    /**
-     * Wise view after the activity is destroyed
-     */
     override fun onDestroy() {
         super.onDestroy()
         presenter.dropView()
     }
-
-
 }

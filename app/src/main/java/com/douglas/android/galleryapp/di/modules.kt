@@ -1,14 +1,13 @@
 package com.douglas.android.galleryapp.di
 
 import android.app.Application
-import android.content.Context
 import com.douglas.android.galleryapp.data.AppRepository
 import com.douglas.android.galleryapp.data.AppRepositoryImp
 import com.douglas.android.galleryapp.data.remote.ApiHelper
 import com.douglas.android.galleryapp.data.remote.RemoteDataSource
 import com.douglas.android.galleryapp.data.remote.RemoteDataSourceImp
 import com.douglas.android.galleryapp.data.remote.ServiceAppFactory
-import com.douglas.android.galleryapp.features.MainActivity
+import com.douglas.android.galleryapp.features.gallery.view.GalleryAppActivity
 import com.douglas.android.galleryapp.features.gallery.GalleryModule
 import dagger.Module
 import dagger.Provides
@@ -20,7 +19,7 @@ import javax.inject.Singleton
 abstract class ActivityModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [GalleryModule::class])
-    abstract fun galleryAcitivity(): MainActivity
+    abstract fun galleryAcitivity(): GalleryAppActivity
 }
 
 @Module
