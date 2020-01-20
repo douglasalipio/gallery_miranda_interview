@@ -33,7 +33,7 @@ Extras
 - Junit4
 - Glid
 
-### Build
+### Installation
 
 - Android Studio 3.5
 - Gradle 5.4.1
